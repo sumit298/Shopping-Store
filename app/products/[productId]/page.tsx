@@ -10,7 +10,6 @@ interface params {
 }
 
 const ProductDetails: React.FC = ({ params }: any) => {
-  const { getProductById } = useContext(ProductContext);
   const [product, setProduct] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -25,7 +24,6 @@ const ProductDetails: React.FC = ({ params }: any) => {
         const result = await axios.get(
           `https://dummyjson.com/products/${productId}`
         );
-        console.log(result.data);
         setProduct(result.data);
         setLoading(false);
       } catch (err: any) {
@@ -36,7 +34,7 @@ const ProductDetails: React.FC = ({ params }: any) => {
 
     fetchProductById(productId);
     // fetchProduct();
-  }, [productId, getProductById]);
+  }, [productId]);
 
   const calculateDiscountPrice = (
     totalPrice: number,

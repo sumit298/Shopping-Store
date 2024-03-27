@@ -11,9 +11,9 @@ import SkeletonCard from "@/components/Skeleton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/lib/cartContext";
-import { metadata } from "../layout";
+import type { Product } from "@/utils/types";
 const Product = () => {
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = React.useState<boolean>(false);
  
   const router = useRouter();
   const toggle = () => {
@@ -46,7 +46,7 @@ const Product = () => {
   
 
   const productNames = () => {
-    return products?.products?.map((product) => {
+    return products?.map((product: Product) => {
       const {
         id,
         title,
@@ -87,12 +87,12 @@ const Product = () => {
     return groupedProducts[selectedCategory] || [];
   }, [products, selectedCategory]);
 
-  const handleCategoryClick = (category) => {
+  const handleCategoryClick = (category: React.SetStateAction<string>) => {
     setSelectedCategory(category);
   };
-  let dataToShow;
+  let dataToShow: React.ReactNode;
   if (error) {
-    dataToShow = <div>Error Occured: {error} </div>;
+    dataToShow = <div>Error Occured: {error.message} </div>;
   } else if (loading) {
     dataToShow = <SkeletonCard />;
   } else {

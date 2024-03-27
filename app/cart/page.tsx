@@ -1,13 +1,15 @@
+"use client"
 import { CartContext } from "@/lib/cartContext";
 import { useContext } from "react";
 
 interface CartProps {
     showModal: boolean;
-    toggle: Function
+    toggle: ()=> void;
 }
 
 
 const Cart:React.FC<any> = ({ showModal, toggle }) => {
+  console.log(typeof (toggle))
   const { cartItems, addToCart, removeFromCart, getCartTotal, clearCart } =
     useContext(CartContext);
 
@@ -42,15 +44,15 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
               </div>
               <div className="flex gap-4 justify-center items-center px-10">
                 <button
-                  className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
-                  onClick={() => addToCart(item)} // Corrected
+                  className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-300 focus:outline-none focus:bg-gray-100"
+                  onClick={() => addToCart(item)} 
                 >
                   +
                 </button>
                 <p>{item.quantity}</p>
                 <button
-                  className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700 dark:hover:bg-gray-200"
-                  onClick={() => removeFromCart(item)} // Corrected
+                  className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-300 focus:outline-none focus:bg-gray-100"
+                  onClick={() => removeFromCart(item)} 
                 >
                   -
                 </button>
@@ -61,10 +63,9 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
         {cartItems?.length > 0 ? (
           <div className="flex flex-col justify-between items-center">
             <h1 className="text-lg font-bold">Total: ${getCartTotal()}</h1>{" "}
-            {/* Corrected */}
             <button
               className="px-4 py-2 mt-2 bg-gray-800 text-white rounded uppercase hover:bg-gray-700 focus:outline-none focus:bg-gray-700 dark:bg-gray-100 dark:text-black dark:hover:bg-gray-200"
-              onClick={() => clearCart()} // Corrected
+              onClick={() => clearCart()} 
             >
               Clear Cart
             </button>
