@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { groupByCategory } from "../../utils/helperFunctions";
+import { getUnique, groupByCategory } from "../../utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
 import SkeletonCard from "@/components/Skeleton";
 import Link from "next/link";
@@ -23,18 +23,7 @@ const Product = () => {
   const { products, loading, error } = useContext(ProductContext);
   const { addToCart, cartItems } = useContext(CartContext);
 
-  const getUnique = (arr) => {
-    // console.log(arr.body)
-    const newArray = arr;
-    let mapObj = new Map();
-    newArray?.forEach((v) => {
-      let prevValue = mapObj.get(v.category);
-      if (!prevValue) {
-        mapObj.set(v.category, v);
-      }
-    });
-    return [...mapObj.values()];
-  };
+  
 
   const uniqueCategory = getUnique(products);
 

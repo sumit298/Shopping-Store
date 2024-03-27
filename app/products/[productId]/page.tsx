@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ProductContext } from "@/lib/productContext";
 import axios from "axios";
+import Spinner from "@/components/Spinner";
 
 interface params {
   productId: number;
@@ -47,8 +48,9 @@ const ProductDetails: React.FC = ({ params }: any) => {
   };
 
   return (
+    !!loading ? <Spinner/> : 
     <div className="flex justify-between dark:bg-gray-800">
-      {loading && <div>Loading</div>}
+      
       {error ? (
         <>Error {error}</>
       ) : (

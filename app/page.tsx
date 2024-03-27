@@ -1,5 +1,4 @@
 "use client";
-import { Header } from "@/components/Header/headers";
 
 import ProductProvider from "@/lib/productContext";
 import ProductList from "./products/page";
@@ -8,7 +7,6 @@ export default function Home() {
   return (
     <ProductProvider>
       <CartProvider>
-        {/* <Header /> */}
         <ProductList />
       </CartProvider>
     </ProductProvider>

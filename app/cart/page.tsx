@@ -14,7 +14,7 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
 
   return (
     showModal && (
-      <div className="flex-col flex items-center bg-white gap-8 p-10 text-black dark:bg-gray-800 dark:text-white text-sm inset-1 left-1/4 fixed uppercase overflow-auto">
+      <div className="flex-col flex items-center bg-white gap-8 p-10 text-black dark:bg-gray-700 dark:text-white text-sm inset-1 left-1/4 fixed uppercase overflow-auto">
         <h1 className="text-2xl font-bold">Cart</h1>
         <div className="absolute right-16 top-8">
           <button
