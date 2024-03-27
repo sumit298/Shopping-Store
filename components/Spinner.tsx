@@ -2,7 +2,7 @@ const Spinner = () => {
     return (
        <div
          role="status"
-         className="flex align-center justify-center w-[100vh] h-[100vh] absolute top-0 left-0 flex-col items-center justify-center"
+         className="flex align-center justify-center w-[100vh] h-[100vh] absolute top-0 left-0 flex-col items-center"
          style={{
            position: "absolute",
            height: "100vh",
