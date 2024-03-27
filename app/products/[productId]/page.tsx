@@ -56,7 +56,7 @@ const ProductDetails: React.FC = ({ params }: any) => {
           <div className="p-10 flex flex-col justify-start w-1/2 items-start bg-gray-100 dark:bg-gray-700 gap-y-4">
             <img className="" src={product?.thumbnail} alt={product?.title} />
             <div>
-              {product?.images?.map((image, index) => (
+              {product?.images?.map((image: string, index: number) => (
                 <img
                   className="h-64 my-4"
                   src={image}

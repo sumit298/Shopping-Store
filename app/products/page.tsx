@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 import { groupByCategory } from "../../utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
-import SkeletonCard from "@/components/Dashboard/Skeleton";
+import SkeletonCard from "@/components/Skeleton";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/lib/cartContext";

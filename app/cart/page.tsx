@@ -7,11 +7,10 @@ interface CartProps {
 }
 
 
-const Cart:React.FC<CartProps> = ({ showModal, toggle }) => {
+const Cart:React.FC<any> = ({ showModal, toggle }) => {
   const { cartItems, addToCart, removeFromCart, getCartTotal, clearCart } =
     useContext(CartContext);
 
-    console.log(cartItems)
 
   return (
     showModal && (
