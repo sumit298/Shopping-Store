@@ -1,42 +1,39 @@
 import type { Product } from "@/utils/types";
-import axios, { AxiosError } from "axios"; 
+import axios, { AxiosError } from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { fetchProductById, fetchProducts } from "./api"; // Assuming this is the correct import
 
 interface ProductContextType {
   products: Product[];
   loading: boolean;
-  error: AxiosError | null; 
-  fetchProductById: (productId: string) => Promise<void>;
-  product?: Product; 
+  error: AxiosError | null;
+  fetchProductsById: (productId: string) => Promise<void>;
+  product?: Product;
 }
 
 export const ProductContext = createContext<ProductContextType>({
   products: [],
   loading: true,
   error: null,
-  fetchProductById: async () => {},
+  fetchProductsById: async () => {},
 });
 
 const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const productsUrl = "https://dummyjson.com/products/";
-
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<AxiosError | null>(null); // Use AxiosError for error state
-  const [product, setProduct] = useState<Product | undefined>(undefined);
+  const [error, setError] = useState<AxiosError | null>(null);
+  const [product, setProduct] = useState<Product | undefined>();
 
-  const fetchProductById = async (productId: string) => {
+  const fetchProductsById = async (productId: string) => {
     try {
       setLoading(true);
-      const result = await axios.get<Product>(
-        `${productsUrl}${productId}`
-      );
-      setProduct(result.data);
+      const product = await fetchProductById(productId);
+      setProduct(product);
     } catch (err) {
       if (axios.isAxiosError(err)) {
-        setError(err); // Set AxiosError type error
+        setError(err);
       } else {
-        console.error(err)
+        console.error(err);
       }
     } finally {
       setLoading(false);
@@ -44,27 +41,28 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   };
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchData = async () => {
       try {
-        const result = await axios.get<{ products: Product[] }>(productsUrl);
-        setProducts(result.data.products || []);
+        setLoading(true);
+        const fetchedProducts = await fetchProducts();
+        setProducts(fetchedProducts);
       } catch (err) {
         if (axios.isAxiosError(err)) {
-          setError(err); 
+          setError(err);
         } else {
-          console.error(err)
+          console.error(err);
         }
       } finally {
         setLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchData();
   }, []);
 
   return (
     <ProductContext.Provider
-      value={{ products, loading, error, fetchProductById, product }}
+      value={{ products, loading, error, fetchProductsById, product }}
     >
       {children}
     </ProductContext.Provider>

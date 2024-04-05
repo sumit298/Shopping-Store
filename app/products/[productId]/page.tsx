@@ -17,14 +17,14 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
-  const { fetchProductById, product, loading, error } =
+  const { fetchProductsById, product, loading, error } =
     useContext(ProductContext);
 
   const { productId } = params;
   const { addToCart, showModal } = useContext(CartContext);
 
   useEffect(() => {
-    fetchProductById(productId);
+    fetchProductsById(productId);
      // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
