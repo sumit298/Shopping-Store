@@ -6,7 +6,7 @@ import { useContext } from "react";
 const Navbar = () => {
   const { addToCart, cartItems, toggle, showModal } = useContext(CartContext);
   return (
-    <div className="lg:flex justify-between items-center md:block md:w-full px-20 py-3 bg-gray-800">
+    <div className="lg:flex justify-between items-center md:block md:w-full px-20 h-[20vh] py-3 bg-gray-800">
       <div className="flex items-center justify-between gap-x-8">
         <Link
           href="/"

@@ -23,30 +23,31 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
     };
    
     return (
-       <div className="overflow-hidden relative w-full"> {/* Ensure the container has a fixed width */}
+       <div className="overflow-hidden relative w-[72%]"> {/* Ensure the container has a fixed width */}
          <div
            className="flex transition ease-out duration-400"
            style={{ transform: `translateX(-${currentIndex * 100}%)` }}
          >
-           {productImages.map((productImage: string, index: number) => {
+           {productImages?.map((productImage: string, index: number) => {
              return (
                <Image
                  src={productImage}
+                 
                  key={index}
                  alt={`image-${index}`}
                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                 fill
-                 layout="objectFit"
+                 width={500}
+                 height={500}
                />
              );
            })}
          </div>
-         <div className="absolute top-0 h-full w-full justify-between items-center flex text-white px-10 text-3xl">
-           <button onClick={prevSlide}>
+         <div className="absolute top-0 h-full w-full justify-between items-center flex text-blue-400 px-5 text-3xl">
+           <button onClick={prevSlide} >
              <BsFillArrowLeftCircleFill />
            </button>
-           <button onClick={nextSlide}>
-             <BsFillArrowRightCircleFill />
+           <button onClick={nextSlide} >
+             <BsFillArrowRightCircleFill  />
            </button>
          </div>
        </div>
