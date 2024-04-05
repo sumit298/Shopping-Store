@@ -1,11 +1,11 @@
 import type { Product } from "@/utils/types";
-import axios from "axios";
+import axios, { AxiosError } from "axios"; 
 import { createContext, ReactNode, useEffect, useState } from "react";
 
 interface ProductContextType {
   products: Product[];
   loading: boolean;
-  error: Error | null;
+  error: AxiosError | null; 
   fetchProductById: (productId: string) => Promise<void>;
   product?: Product; 
 }
@@ -18,22 +18,26 @@ export const ProductContext = createContext<ProductContextType>({
 });
 
 const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const productsUrl = "https://dummyjson.com/products";
+  const productsUrl = "https://dummyjson.com/products/";
 
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-  const [product, setProduct] = useState<Product | undefined>(undefined); // Initialize as undefined
+  const [error, setError] = useState<AxiosError | null>(null); // Use AxiosError for error state
+  const [product, setProduct] = useState<Product | undefined>(undefined);
 
   const fetchProductById = async (productId: string) => {
     try {
       setLoading(true);
-      const result = await axios.get(
-        `https://dummyjson.com/products/${productId}`
+      const result = await axios.get<Product>(
+        `${productsUrl}${productId}`
       );
       setProduct(result.data);
-    } catch (err: any) {
-      setError(err);
+    } catch (err) {
+      if (axios.isAxiosError(err)) {
+        setError(err); // Set AxiosError type error
+      } else {
+        console.error(err)
+      }
     } finally {
       setLoading(false);
     }
@@ -44,8 +48,12 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
       try {
         const result = await axios.get<{ products: Product[] }>(productsUrl);
         setProducts(result.data.products || []);
-      } catch (error: any) {
-        setError(error);
+      } catch (err) {
+        if (axios.isAxiosError(err)) {
+          setError(err); 
+        } else {
+          console.error(err)
+        }
       } finally {
         setLoading(false);
       }

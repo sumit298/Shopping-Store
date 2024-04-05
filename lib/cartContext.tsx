@@ -1,15 +1,6 @@
 "use client";
+import { CartItem } from "@/utils/types";
 import React, { createContext, ReactNode, useEffect, useState } from "react";
-
-interface CartItem {
-  thumbnail: string;
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  toggle?: () => void;
-  showModal?: boolean;
-}
 
 interface CartContextType {
   cartItems: CartItem[];
@@ -27,7 +18,6 @@ export const CartContext = createContext<CartContextType>({
   removeFromCart: () => {},
   clearCart: () => {},
   getCartTotal: () => 0,
-
 });
 
 const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

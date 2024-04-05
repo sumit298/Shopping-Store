@@ -13,3 +13,14 @@ export interface Product {
     stock?: number;
     brand?: string;
 }
+
+
+export interface CartItem {
+    thumbnail: string;
+    id: number;
+    name: string;
+    price: number;
+    quantity: number;
+    toggle?: () => void;
+    showModal?: boolean;
+  }

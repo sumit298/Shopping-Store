@@ -5,19 +5,19 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getUnique, groupByCategory } from "../../utils/helperFunctions";
+import { getUnique, groupByCategory, notify } from "../../utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
 import SkeletonCard from "@/components/Skeleton";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/lib/cartContext";
-import type { Product } from "@/utils/types";
+import type { CartItem, Product } from "@/utils/types";
 import Image from "next/image";
 
 const Product = () => {
   const router = useRouter();
 
   const { products, loading, error } = useContext(ProductContext);
-  const { addToCart, cartItems, showModal } = useContext(CartContext);
+  const { addToCart, showModal } = useContext(CartContext);
 
   const uniqueCategory = getUnique(products);
 
@@ -94,26 +94,12 @@ const Product = () => {
             // key={product.id}
           >
             {filteredProducts?.map((product) => {
-              const notify = () =>
-                toast(`${product.title} is added to the cart`, {
-                  position: "top-right",
-                  autoClose: 2000,
-                  hideProgressBar: false,
-                  closeOnClick: true,
-                  pauseOnHover: true,
-                  draggable: true,
-                  theme: "colored",
-                  type: "success",
-                  style: {
-                    backgroundColor: "#fff",
-                    color: "#000",
-                  },
-                });
+             
               const handleFunction = () => {
-                notify();
+                notify(product);
 
                 // Correctly create a CartItem object
-                const cartItem: any = {
+                const cartItem: CartItem = {
                   id: product.id,
                   name: product.title, // Assuming 'title' is the correct property for the product name
                   price: product.price,
@@ -165,7 +151,7 @@ const Product = () => {
           </div>
           {showModal && <Cart />}
         </div>
-       
+       <ToastContainer/>
       </>
     );
   }

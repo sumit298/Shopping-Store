@@ -4,8 +4,12 @@ import { ProductContext } from "@/lib/productContext";
 import Spinner from "@/components/Spinner";
 import ImageSlider from "@/components/ImageSlider";
 import { CartContext } from "@/lib/cartContext";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Cart from "@/app/cart/page";
+import { notify } from "@/utils/helperFunctions";
+import { CartItem, Product } from "@/utils/types";
 
 interface ProductDetailsProps {
   params: {
@@ -22,7 +26,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
 
   useEffect(() => {
     fetchProductById(productId);
-  }, [fetchProductById, productId]);
+  }, [productId]);
 
   if (loading) return <Spinner />;
 
@@ -43,26 +47,10 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
     return Math.round(discountedPrice);
   };
 
-  const notify = () =>
-    toast(`${product.title} is added to the cart`, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-      type: "success",
-      style: {
-        backgroundColor: "#fff",
-        color: "#000",
-      },
-    });
-
   const handleFunction = () => {
-    notify();
+    notify(product);
 
-    const cartItem: any = {
+    const cartItem: CartItem = {
       id: product.id,
       name: product.title,
       price: product.price,
@@ -109,6 +97,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
         </div>
       </div>
       {showModal && <Cart />}
+      <ToastContainer />
     </div>
   );
 };

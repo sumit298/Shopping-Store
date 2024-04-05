@@ -1,5 +1,5 @@
 import type { Product } from "./types";
-
+import {toast} from 'react-toastify'
 
 export const groupByCategory = (products: Product[]): { [key: string]: Product[] } => {
   return products.reduce((acc: { [key: string]: Product[] }, product: Product) => {
@@ -23,3 +23,19 @@ export const getUnique = (arr: Product[]): Product[] => {
   });
   return Array.from(mapObj.values());
 };
+
+
+export const notify = (product: Product) =>
+  toast(`${product.title} is added to the cart`, {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: !true,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    type: "success",
+    style: {
+      backgroundColor: "#fff",
+      color: "#000",
+    },
+  });
