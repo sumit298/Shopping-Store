@@ -1,18 +1,18 @@
-"use client"
+"use client";
 import { CartContext } from "@/lib/cartContext";
 import { useContext } from "react";
+import Image from "next/image";
 
-interface CartProps {
-    showModal: boolean;
-    toggle: ()=> void;
-}
-
-
-const Cart:React.FC<any> = ({ showModal, toggle }) => {
-  console.log(typeof (toggle))
-  const { cartItems, addToCart, removeFromCart, getCartTotal, clearCart } =
-    useContext(CartContext);
-
+const Cart = () => {
+  const {
+    cartItems,
+    addToCart,
+    removeFromCart,
+    getCartTotal,
+    clearCart,
+    showModal,
+    toggle,
+  } = useContext(CartContext);
 
   return (
     showModal && (
@@ -30,10 +30,12 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
           {cartItems?.map((item) => (
             <div className="flex justify-between items-center" key={item.id}>
               <div className="flex gap-4">
-                <img
+                <Image
                   src={item?.thumbnail}
                   alt={item?.name}
                   className="rounded-md h-24"
+                  width={170}
+                  height={400}
                 />
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold">{item?.name}</h1>
@@ -45,14 +47,14 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
               <div className="flex gap-4 justify-center items-center px-10">
                 <button
                   className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-300 focus:outline-none focus:bg-gray-100"
-                  onClick={() => addToCart(item)} 
+                  onClick={() => addToCart(item)}
                 >
                   +
                 </button>
                 <p>{item.quantity}</p>
                 <button
                   className="px-4 py-2 bg-gray-800 dark:bg-gray-100 dark:text-black text-white text-sm font-bold uppercase rounded hover:bg-gray-300 focus:outline-none focus:bg-gray-100"
-                  onClick={() => removeFromCart(item)} 
+                  onClick={() => removeFromCart(item)}
                 >
                   -
                 </button>
@@ -65,7 +67,7 @@ const Cart:React.FC<any> = ({ showModal, toggle }) => {
             <h1 className="text-lg font-bold">Total: ${getCartTotal()}</h1>{" "}
             <button
               className="px-4 py-2 mt-2 bg-gray-800 text-white rounded uppercase hover:bg-gray-700 focus:outline-none focus:bg-gray-700 dark:bg-gray-100 dark:text-black dark:hover:bg-gray-200"
-              onClick={() => clearCart()} 
+              onClick={() => clearCart()}
             >
               Clear Cart
             </button>

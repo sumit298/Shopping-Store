@@ -8,42 +8,18 @@ import "react-toastify/dist/ReactToastify.css";
 import { getUnique, groupByCategory } from "../../utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
 import SkeletonCard from "@/components/Skeleton";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CartContext } from "@/lib/cartContext";
 import type { Product } from "@/utils/types";
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
 const Product = () => {
-  const [showModal, setShowModal] = React.useState<boolean>(false);
- 
   const router = useRouter();
-  const toggle = () => {
-    setShowModal(!showModal);
-  };
 
   const { products, loading, error } = useContext(ProductContext);
-  const { addToCart, cartItems } = useContext(CartContext);
-
-  
+  const { addToCart, cartItems, showModal } = useContext(CartContext);
 
   const uniqueCategory = getUnique(products);
-
-  const notifyError = () =>
-    toast(`${error}`, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      theme: "colored",
-      type: "error",
-      style: {
-        backgroundColor: "#fff",
-        color: "#000",
-      },
-    });
-
-  
 
   const productNames = () => {
     return products?.map((product: Product) => {
@@ -99,28 +75,8 @@ const Product = () => {
     dataToShow = (
       <>
         <div className="flex flex-col justify-center h-auto bg-gray-50 dark:bg-gray-800">
-          <div className="lg:flex justify-between items-center md:block md:w-full px-20 py-5">
-            <div className="flex items-center justify-between gap-x-8">
-              <Link
-                href="/"
-                className="text-2xl uppercase font-bold mt-10 text-center mb-10 dark:text-white"
-              >
-                Shopping Store
-              </Link>
-            </div>
+        
 
-            <div className="flex gap-x-4 items-center">
-
-              {!showModal && (
-                <button
-                  className="px-4 py-3 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-700 dark:bg-gray-100 dark:text-black"
-                  onClick={toggle}
-                >
-                  Cart ({cartItems?.length})
-                </button>
-              )}
-            </div>
-          </div>
           <div className="flex gap-2 p-10 flex-wrap ">
             {uniqueCategory?.map((product) => {
               return (
@@ -179,10 +135,12 @@ const Product = () => {
                   <button
                     onClick={() => router.push(`/products/${product.id}`)}
                   >
-                    <img
+                    <Image
                       src={product.thumbnail}
                       alt=""
                       className="rounded-md h-48"
+                      width={400}
+                      height={400}
                     />
                   </button>
                   <div className="mt-4">
@@ -208,9 +166,9 @@ const Product = () => {
               );
             })}
           </div>
-          {showModal && <Cart showModal={showModal} toggle={toggle} />}
+          {showModal && <Cart />}
         </div>
-        <ToastContainer/>
+        <ToastContainer />
       </>
     );
   }
