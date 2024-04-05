@@ -2,14 +2,12 @@ import type { Product } from "@/utils/types";
 import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
-
-
 interface ProductContextType {
   products: Product[];
   loading: boolean;
   error: Error | null;
   fetchProductById: (productId: string) => Promise<void>;
-  product: Product | null; 
+  product?: Product; 
 }
 
 export const ProductContext = createContext<ProductContextType>({
@@ -17,7 +15,6 @@ export const ProductContext = createContext<ProductContextType>({
   loading: true,
   error: null,
   fetchProductById: async () => {},
-  product: null,
 });
 
 const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -26,7 +23,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-  const [product, setProduct] = useState<Product | null>(null);
+  const [product, setProduct] = useState<Product | undefined>(undefined); // Initialize as undefined
 
   const fetchProductById = async (productId: string) => {
     try {

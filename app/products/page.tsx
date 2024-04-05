@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { CartContext } from "@/lib/cartContext";
 import type { Product } from "@/utils/types";
 import Image from "next/image";
-import Navbar from "@/components/Navbar";
+
 const Product = () => {
   const router = useRouter();
 
@@ -75,8 +75,6 @@ const Product = () => {
     dataToShow = (
       <>
         <div className="flex flex-col justify-center h-auto bg-gray-50 dark:bg-gray-800">
-        
-
           <div className="flex gap-2 p-10 flex-wrap ">
             {uniqueCategory?.map((product) => {
               return (
@@ -124,13 +122,12 @@ const Product = () => {
                 };
 
                 addToCart(cartItem);
-                // dispatch(productAddToCart(userId, productAddedToCartObject));
               };
 
               return (
                 <div
                   key={product.id}
-                  className="bg-white shadow-md rounded-lg p-10 dark:bg-black"
+                  className="bg-white shadow-md rounded-lg p-10 dark:bg-black mb-4"
                 >
                   <button
                     onClick={() => router.push(`/products/${product.id}`)}
@@ -168,7 +165,7 @@ const Product = () => {
           </div>
           {showModal && <Cart />}
         </div>
-        <ToastContainer />
+       
       </>
     );
   }

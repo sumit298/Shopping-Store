@@ -5,6 +5,8 @@ import "./globals.css";
 import ProductProvider from "@/lib/productContext";
 import CartProvider from "@/lib/cartContext";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,6 +27,7 @@ export default function RootLayout({
           <CartProvider>
             <Navbar />
             {children}
+            <Footer/>
           </CartProvider>
         </ProductProvider>
       </body>
