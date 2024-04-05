@@ -4,7 +4,6 @@ import { ProductContext } from "@/lib/productContext";
 import Spinner from "@/components/Spinner";
 import ImageSlider from "@/components/ImageSlider";
 import { CartContext } from "@/lib/cartContext";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Cart from "@/app/cart/page";
@@ -98,7 +97,6 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
         </div>
       </div>
       {showModal && <Cart />}
-      <ToastContainer />
     </div>
   );
 };

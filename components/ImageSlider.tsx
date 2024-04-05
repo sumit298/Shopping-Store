@@ -58,7 +58,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
                 setCurrentIndex(i);
               }}
               key={"circle" + i}
-              className={`rounded-full w-5 h-5 cursor-pointer ${
+              className={`rounded-full w-4 h-4 cursor-pointer ${
                 i == currentIndex ? "bg-blue-400" : "bg-gray-500"
               }`}
             ></div>
