@@ -23,7 +23,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
   };
 
   return (
-    <div className="overflow-hidden relative w-[72%]">
+    <div className="overflow-hidden relative w-[72%] z-50">
       <div
         className="flex transition ease-out duration-400"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}

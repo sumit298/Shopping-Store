@@ -38,11 +38,11 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 ### Features to be added
 
-[] Remove unnecessary code.
-[] Use Image component not img tag.
-[] Use Server Side Rendering.
-[] Do proper type to component and page props.
-[] Do common code for API calling.
-[] In product detail page change image slider.
-[] Create Header and Footer components.
-[] In cart view add remove functionality.
+- [X] Remove unnecessary code.
+- [X] Use Image component not img tag.
+- [ ] Use Server Side Rendering.
+- [X] Do proper type to component and page props.
+- [X] Do common code for API calling.
+- [X] In product detail page change image slider.
+- [X] Create Header and Footer components.
+- [X] In cart view add remove functionality.
