@@ -4,20 +4,7 @@ import Skeleton from "react-loading-skeleton";
 const SkeletonCard = () => {
   return (
     <div className="flex px-10 flex-col gap-2 dark:bg-gray-800">
-    <div className="flex px-8 justify-between items-center">
-      {/* <Skeleton
-        count={1}
-        width={"5rem"}
-        height={"2rem"}
-        containerClassName={"flex gap-2 dark:bg-black"}
-      />
-      <Skeleton
-        count={1}
-        width={"5rem"}
-        height={"2rem"}
-        containerClassName={"flex gap-2"}
-      /> */}
-    </div>
+    
     <div className="mt-14 flex flex-col gap-4">
       <Skeleton count={1} height={"35px"} />
       <Skeleton count={1} height={"35px"} />

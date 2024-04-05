@@ -1,5 +1,4 @@
 import { CartContext } from "@/lib/cartContext";
-import { ProductContext } from "@/lib/productContext";
 import Link from "next/link";
 import { useContext } from "react";
 

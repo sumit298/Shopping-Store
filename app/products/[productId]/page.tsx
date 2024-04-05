@@ -4,7 +4,7 @@ import { ProductContext } from "@/lib/productContext";
 import Spinner from "@/components/Spinner";
 import ImageSlider from "@/components/ImageSlider";
 import { CartContext } from "@/lib/cartContext";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Cart from "@/app/cart/page";
@@ -26,6 +26,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
 
   useEffect(() => {
     fetchProductById(productId);
+     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [productId]);
 
   if (loading) return <Spinner />;
@@ -62,7 +63,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
   };
 
   return (
-    <div className="flex flex-wrap align-center dark:bg-gray-800 h-[70vh] overflow-y-hidden">
+    <div className="flex  align-center dark:bg-gray-800 h-[70vh] overflow-y-hidden">
       <div className="mx-[6%] w-[35%] ">
         <ImageSlider productImages={product.images || []} />
       </div>
