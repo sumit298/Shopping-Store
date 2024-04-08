@@ -9,6 +9,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Cart from "@/app/cart/page";
 import { notify } from "@/utils/helperFunctions";
 import { CartItem, Product } from "@/utils/types";
+import { ToastContainer } from "react-toastify";
 
 interface ProductDetailsProps {
   params: {
@@ -24,8 +25,9 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
   const { addToCart, showModal } = useContext(CartContext);
 
   useEffect(() => {
-    fetchProductsById(productId);
-     // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (productId) {
+      fetchProductsById(productId);
+    }
   }, [productId]);
 
   if (loading) return <Spinner />;
@@ -89,7 +91,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
         </p>
         <div className="mt-6 flex flex-col">
           <button
-            className="text-white w-[80%] bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="w-36 font-semibold px-4 py-1.5 bg-gray-200  rounded uppercase hover:bg-gray-300 focus:outline-none"
             onClick={() => handleFunction()}
           >
             Add to cart
@@ -97,6 +99,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
         </div>
       </div>
       {showModal && <Cart />}
+      <ToastContainer />
     </div>
   );
 };

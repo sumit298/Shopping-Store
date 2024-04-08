@@ -1,14 +1,15 @@
-"use client"
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ProductProvider from "@/lib/productContext";
-import CartProvider from "@/lib/cartContext";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import { Metadata } from "next";
+
+import { Providers } from "./provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
-
+export const metadata: Metadata = {
+  title: "Shopping Store",
+  description: "Welcome to our shopping app",
+};
 
 export default function RootLayout({
   children,
@@ -18,14 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ProductProvider>
-          <CartProvider>
-            <Navbar />
-
-            {children}
-            <Footer />
-          </CartProvider>
-        </ProductProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

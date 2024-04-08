@@ -35,14 +35,26 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-
 ### Features to be added
 
-- [X] Remove unnecessary code.
-- [X] Use Image component not img tag.
-- [ ] Use Server Side Rendering.
-- [X] Do proper type to component and page props.
-- [X] Do common code for API calling.
-- [X] In product detail page change image slider.
-- [X] Create Header and Footer components.
-- [X] In cart view add remove functionality.
+- [x] Remove unnecessary code.
+- [x] Use Image component not img tag.
+- [x] Use Server Side Rendering.
+- [x] Do proper type to component and page props.
+- [x] Do common code for API calling.
+- [x] In product detail page change image slider.
+- [x] Create Header and Footer components.
+- [x] In cart view add remove functionality.
+
+### More changes
+
+- [X] Layout.tsx: The usage of use client in Layout.tsx might not be following best practices according to Next.js documentation. It's recommended to explore alternative approaches. Consider referring to the docs for guidance.
+- [X] API Implementation: It's ideal to define the Base URL for your API calls within an environment variable (env) for better maintainability and security.
+- [] Metadata: The metadata implementation in your code seems to have inconsistencies with Next.js 14's recommendations. Double-check the official documentation at https://nextjs.org/docs/app/building-your-application/optimizing/metadata for the latest guidelines.
+- [X] Add-to-Cart Component: There appears to be a discrepancy in the add-to-cart component between the main page and the product detail page. Ensure consistency in their implementation. Additionally, the "toasty" functionality seems to be working only on the main page. Investigate why it's not functioning on the product detail page.
+- [X] Production Warning: You might encounter a warning related to "images.domains" being deprecated in production. Update your configuration to use "images.remotePatterns" instead, as suggested in the warning message.
+- [] ESLint Disabling: Disabling ESLint warnings with eslint-disable-next-line is generally discouraged. Consider implementing server-side rendering or server-side API calls to address the underlying issue that's triggering the ESLint warning
+
+
+### API URL - add to .env file
+- NEXT_PUBLIC_PRODUCTS_URL='https://dummyjson.com/products/'

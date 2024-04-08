@@ -7,7 +7,6 @@ const SkeletonCard = () => {
     
     <div className="mt-14 flex flex-col gap-4">
       <Skeleton count={1} height={"35px"} />
-      <Skeleton count={1} height={"35px"} />
 
     </div>
     <div className="flex flex-col gap-2 py-6">

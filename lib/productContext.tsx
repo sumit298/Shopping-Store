@@ -23,11 +23,12 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<AxiosError | null>(null);
   const [product, setProduct] = useState<Product | undefined>();
+  const productsUrl = `${process.env.NEXT_PUBLIC_PRODUCTS_URL}`;
 
   const fetchProductsById = async (productId: string) => {
     try {
       setLoading(true);
-      const product = await fetchProductById(productId);
+      const product = await fetchProductById(productsUrl, productId);
       setProduct(product);
     } catch (err) {
       if (axios.isAxiosError(err)) {
@@ -44,7 +45,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const fetchedProducts = await fetchProducts();
+        const fetchedProducts = await fetchProducts(productsUrl);
         setProducts(fetchedProducts);
       } catch (err) {
         if (axios.isAxiosError(err)) {
@@ -58,7 +59,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     fetchData();
-  }, []);
+  }, [productsUrl]);
 
   return (
     <ProductContext.Provider

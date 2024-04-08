@@ -2,11 +2,9 @@
 import { Product } from "@/utils/types";
 import axios from "axios";
 
-const productsUrl = "https://dummyjson.com/products/";
-
-export const fetchProducts = async (): Promise<Product[]> => {
+export const fetchProducts = async (url: string): Promise<Product[]> => {
   try {
-    const response = await axios.get<{ products: Product[] }>(productsUrl);
+    const response = await axios.get<{ products: Product[] }>(url);
     return response.data.products || []; // Ensure an empty array is returned if no products are fetched
   } catch (error) {
     console.error(error);
@@ -14,9 +12,9 @@ export const fetchProducts = async (): Promise<Product[]> => {
   }
 };
 
-export const fetchProductById = async (productId: string) => {
+export const fetchProductById = async (url: string, productId: string) => {
   try {
-    const result = await axios.get<Product>(`${productsUrl}${productId}`);
+    const result = await axios.get<Product>(`${url}${productId}`);
     return result.data;
   } catch (err) {
     if (axios.isAxiosError(err)) {
