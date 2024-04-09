@@ -1,7 +1,7 @@
 import type { Product } from "@/utils/types";
 import axios, { AxiosError } from "axios";
-import { createContext, ReactNode, useEffect, useState } from "react";
-import { fetchProductById, fetchProducts } from "./api"; // Assuming this is the correct import
+import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
+import {fetchProducts, fetchProductById} from './api' // Assuming this is the correct import
 
 interface ProductContextType {
   products: Product[];
@@ -25,7 +25,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [product, setProduct] = useState<Product | undefined>();
   const productsUrl = `${process.env.NEXT_PUBLIC_PRODUCTS_URL}`;
 
-  const fetchProductsById = async (productId: string) => {
+  const fetchProductsById = useCallback(async (productId: string) => {
     try {
       setLoading(true);
       const product = await fetchProductById(productsUrl, productId);
@@ -39,7 +39,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+ }, [productsUrl]); // Dependency array includes productsUrl
 
   useEffect(() => {
     const fetchData = async () => {

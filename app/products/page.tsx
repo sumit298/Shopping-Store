@@ -124,6 +124,7 @@ const Product = () => {
                       className="rounded-md h-48"
                       width={400}
                       height={400}
+                      priority
                     />
                   </button>
                   <div className="mt-4">

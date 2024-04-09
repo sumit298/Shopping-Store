@@ -36,6 +36,7 @@ const Cart = () => {
                   className="rounded-md h-24"
                   width={170}
                   height={400}
+                  priority
                 />
                 <div className="flex flex-col">
                   <h1 className="text-lg font-bold">{item?.name}</h1>

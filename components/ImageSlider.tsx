@@ -1,5 +1,5 @@
+import React, { useState, useEffect, useCallback } from "react"; // Import useEffect
 import Image from "next/image";
-import { useState } from "react";
 import {
   BsFillArrowLeftCircleFill,
   BsFillArrowRightCircleFill,
@@ -11,17 +11,25 @@ interface ImageSliderProps {
 
 const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const nextSlide = () => {
-    if (currentIndex === productImages.length - 1) setCurrentIndex(0);
-    else setCurrentIndex(currentIndex + 1);
-  };
-
+ 
+  const nextSlide = useCallback(() => {
+     if (currentIndex === productImages.length - 1) setCurrentIndex(0);
+     else setCurrentIndex(currentIndex + 1);
+  }, [currentIndex, productImages.length]); // Dependencies of nextSlide
+ 
   const prevSlide = () => {
-    if (currentIndex === 0) setCurrentIndex(productImages.length - 1);
-    else setCurrentIndex(currentIndex - 1);
+     if (currentIndex === 0) setCurrentIndex(productImages.length - 1);
+     else setCurrentIndex(currentIndex - 1);
   };
-
+ 
+  useEffect(() => {
+     const intervalId = setInterval(() => {
+       nextSlide();
+     }, 3000);
+ 
+     // Clean up the interval on component unmount or when productImages changes
+     return () => clearInterval(intervalId);
+  }, [productImages, currentIndex, nextSlide]);
   return (
     <div className="overflow-hidden relative w-[72%] ">
       <div
@@ -37,7 +45,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               width={500}
               height={300}
-              
+              priority
             />
           );
         })}

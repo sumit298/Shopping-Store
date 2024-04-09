@@ -1,0 +1,1 @@
+export const productsUrl = `${process.env.NEXT_PUBLIC_PRODUCTS_URL}`;

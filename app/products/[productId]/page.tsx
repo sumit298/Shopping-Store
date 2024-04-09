@@ -1,6 +1,5 @@
 "use client";
 import React, { useContext, useEffect } from "react";
-import { ProductContext } from "@/lib/productContext";
 import Spinner from "@/components/Spinner";
 import ImageSlider from "@/components/ImageSlider";
 import { CartContext } from "@/lib/cartContext";
@@ -8,8 +7,9 @@ import "react-toastify/dist/ReactToastify.css";
 
 import Cart from "@/app/cart/page";
 import { notify } from "@/utils/helperFunctions";
-import { CartItem, Product } from "@/utils/types";
+import { CartItem } from "@/utils/types";
 import { ToastContainer } from "react-toastify";
+import { ProductContext } from "@/lib/productContext";
 
 interface ProductDetailsProps {
   params: {
@@ -18,17 +18,14 @@ interface ProductDetailsProps {
 }
 
 const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
-  const { fetchProductsById, product, loading, error } =
-    useContext(ProductContext);
-
   const { productId } = params;
   const { addToCart, showModal } = useContext(CartContext);
+  const { product, loading, error, fetchProductsById } =
+    useContext(ProductContext);
 
   useEffect(() => {
-    if (productId) {
-      fetchProductsById(productId);
-    }
-  }, [productId]);
+    fetchProductsById(productId);
+  }, [productId, fetchProductsById]);
 
   if (loading) return <Spinner />;
 
