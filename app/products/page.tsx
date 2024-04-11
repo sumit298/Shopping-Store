@@ -5,7 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
 
-import { getUnique, groupByCategory, notify } from "../../utils/helperFunctions";
+import {
+  getUnique,
+  groupByCategory,
+  notify,
+} from "../../utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
 import SkeletonCard from "@/components/Skeleton";
 import { useRouter } from "next/navigation";
@@ -20,38 +24,6 @@ const Product = () => {
   const { addToCart, showModal } = useContext(CartContext);
 
   const uniqueCategory = getUnique(products);
-
-  const productNames = () => {
-    return products?.map((product: Product) => {
-      const {
-        id,
-        title,
-        category,
-        price,
-        discountPercentage,
-        description,
-        images,
-        rating,
-        stock,
-        thumbnail,
-      } = product;
-
-      return {
-        id,
-        name: title,
-        category,
-        price,
-        discountPercentage,
-        description,
-        thumbnail,
-        images,
-        rating,
-        stock,
-      };
-    });
-  };
-
-  const productArray = productNames();
 
   const [selectedCategory, setSelectedCategory] = React.useState("");
 
@@ -94,7 +66,6 @@ const Product = () => {
             // key={product.id}
           >
             {filteredProducts?.map((product) => {
-             
               const handleFunction = () => {
                 notify(product);
 
@@ -152,7 +123,7 @@ const Product = () => {
           </div>
           {showModal && <Cart />}
         </div>
-       <ToastContainer/>
+        <ToastContainer />
       </>
     );
   }

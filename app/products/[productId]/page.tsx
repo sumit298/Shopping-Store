@@ -4,7 +4,6 @@ import Spinner from "@/components/Spinner";
 import ImageSlider from "@/components/ImageSlider";
 import { CartContext } from "@/lib/cartContext";
 import "react-toastify/dist/ReactToastify.css";
-
 import Cart from "@/app/cart/page";
 import { notify } from "@/utils/helperFunctions";
 import { CartItem } from "@/utils/types";
@@ -27,7 +26,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ params }) => {
     fetchProductsById(productId);
   }, [productId, fetchProductsById]);
 
-  if (loading) return <Spinner />;
+  if (!!loading) return <Spinner />;
 
   if (error) return <>Error {error}</>;
 
