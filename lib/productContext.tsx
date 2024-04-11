@@ -40,7 +40,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } finally {
       setLoading(false);
     }
- }, [productsUrl]); // Dependency array includes productsUrl
+ }, []); // Dependency array includes productsUrl
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,7 +60,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     fetchData();
-  }, [productsUrl]);
+  }, []);
 
   return (
     <ProductContext.Provider
