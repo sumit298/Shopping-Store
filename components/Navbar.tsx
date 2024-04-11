@@ -21,7 +21,7 @@ const Navbar = () => {
             className="px-4 py-3 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-200 focus:outline-none focus:bg-gray-700 dark:bg-gray-100 dark:text-black"
             onClick={toggle}
           >
-            Cart ({cartItems?.length})
+            Cart ({cartItems.length})
           </button>
         )}
       </div>

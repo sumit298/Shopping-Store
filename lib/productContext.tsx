@@ -40,7 +40,7 @@ const ProductProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     } finally {
       setLoading(false);
     }
- }, []); // Dependency array includes productsUrl
+ }, []); 
 
   useEffect(() => {
     const fetchData = async () => {

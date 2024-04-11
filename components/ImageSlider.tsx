@@ -36,7 +36,7 @@ const ImageSlider: React.FC<ImageSliderProps> = ({ productImages }) => {
         className="flex transition ease-out duration-400"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {productImages?.map((productImage: string, index: number) => {
+        {productImages.map((productImage: string, index: number) => {
           return (
             <Image
               src={productImage}

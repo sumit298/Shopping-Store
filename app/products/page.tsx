@@ -1,6 +1,6 @@
 "use client";
 import React, { useContext } from "react";
-import Cart from "../cart/page";
+import Cart from "@/app/cart/page";
 import { ToastContainer, toast } from "react-toastify";
 import "react-loading-skeleton/dist/skeleton.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -9,7 +9,7 @@ import {
   getUnique,
   groupByCategory,
   notify,
-} from "../../utils/helperFunctions";
+} from "@/utils/helperFunctions";
 import { ProductContext } from "@/lib/productContext";
 import SkeletonCard from "@/components/Skeleton";
 import { useRouter } from "next/navigation";
@@ -48,7 +48,7 @@ const Product = () => {
       <>
         <div className="flex flex-col justify-center h-auto bg-gray-50 dark:bg-gray-800">
           <div className="flex gap-2 p-10 flex-wrap ">
-            {uniqueCategory?.map((product) => {
+            {uniqueCategory.map((product) => {
               return (
                 <div className="flex flex-col" key={product.id}>
                   <button
@@ -65,7 +65,7 @@ const Product = () => {
             className="grid gap-4 px-10 lg:grid-cols-4 sm:grid-cols-2 md:grid-cols-3 "
             // key={product.id}
           >
-            {filteredProducts?.map((product) => {
+            {filteredProducts.map((product) => {
               const handleFunction = () => {
                 notify(product);
 
